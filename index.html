@@ -175,6 +175,7 @@
 
     <button id="btn-quiz">Realizar Quiz</button>
     <button id="btn-reintentar" style="display:none;">Reintentar Quiz</button>
+    <div id="resultado-quiz"></div>
   </div>
 
   <script>
@@ -234,36 +235,48 @@
     }
 
     function enlazarQuiz(){
-      const btnQuiz = document.getElementById('btn-quiz');
-      const btnReintentar = document.getElementById('btn-reintentar');
+  const btnQuiz = document.getElementById('btn-quiz');
+  const btnReintentar = document.getElementById('btn-reintentar');
+  let resultadoDiv = document.getElementById('resultado-quiz');
 
-      btnQuiz.onclick = () => {
-        let puntaje = 0;
-        btnQuiz.style.display = 'none';
+  if (!resultadoDiv) {
+    resultadoDiv = document.createElement("div");
+    resultadoDiv.id = "resultado-quiz";
+    resultadoDiv.style.marginTop = "20px";
+    resultadoDiv.style.padding = "12px";
+    resultadoDiv.style.background = "#2b2b2b";
+    resultadoDiv.style.borderRadius = "10px";
+    panel.appendChild(resultadoDiv);
+  }
 
-        for(let i=0;i<preguntas.length;i++){
-          let resp = prompt(preguntas[i].pregunta);
-          if(normalizarTexto(resp) === normalizarTexto(preguntas[i].respuesta)){
-            puntaje++;
-            alert("¡Correcto!");
-          } else {
-            alert(`Incorrecto. La respuesta correcta es: ${preguntas[i].respuesta}`);
-          }
-        }
+  btnQuiz.onclick = () => {
+    let puntaje = 0;
+    btnQuiz.style.display = 'none';
 
-        alert(`Tu puntaje: ${puntaje} / ${preguntas.length}`);
-        if(puntaje < preguntas.length){
-          btnReintentar.style.display = 'inline-block';
-        } else {
-          btnQuiz.style.display = 'inline-block';
-        }
-      };
-
-      btnReintentar.onclick = () => {
-        btnReintentar.style.display = 'none';
-        btnQuiz.click();
-      };
+    for (let i = 0; i < preguntas.length; i++) {
+      let resp = prompt(preguntas[i].pregunta);
+      if (normalizarTexto(resp) === normalizarTexto(preguntas[i].respuesta)) {
+        puntaje++;
+      }
     }
+
+    resultadoDiv.innerHTML = `
+      <h2 style="color:#ffcc00;">Resultado del Quiz</h2>
+      <p><strong>Puntaje:</strong> ${puntaje} / ${preguntas.length}</p>
+    `;
+
+    if(puntaje < preguntas.length){
+      btnReintentar.style.display = 'inline-block';
+    } else {
+      btnQuiz.style.display = 'inline-block';
+    }
+  };
+
+  btnReintentar.onclick = () => {
+    btnReintentar.style.display = 'none';
+    btnQuiz.click();
+  };
+}
 
     enlazarQuiz();
   </script>
