@@ -111,6 +111,21 @@
       border-radius: 5px;
       cursor: pointer;
     }
+      
+    #btnLibro {
+  	  margin: 20px;
+  	  padding: 10px 15px;
+  	  font-weight: bold;
+  	  background-color: #ffcc00;
+  	  color: black;
+  	  border: none;
+  	  border-radius: 5px;
+  	  cursor: pointer;
+	}
+
+	#btnLibro:hover {
+      background-color: #ffaa00;
+	}
 
     #btn-quiz:hover, #btn-reintentar:hover { background-color: #ffaa00; }
   </style>
@@ -172,11 +187,11 @@
     <div id="mensaje-inicial">
       <h2>Selecciona una unidad única para ver sus estadísticas</h2>
     </div>
-
     <button id="btn-quiz">Realizar Quiz</button>
     <button id="btn-reintentar" style="display:none;">Reintentar Quiz</button>
     <div id="resultado-quiz"></div>
-  </div>
+  	</div>
+	<button id="btnLibro" onclick="window.location.href='https://mastermind7575.lovestoblog.com/formulario.php'">Libro de Visitas</button>
 
   <script>
     const unidades = document.querySelectorAll('.unidad');
