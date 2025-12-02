@@ -5,7 +5,7 @@ if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
 }
 
-$resultado = mysqli_query($conexion, "SELECT nombre, comentario FROM visitas ORDER BY id DESC");
+$resultado = mysqli_query($conexion, "SELECT nombre, comentario FROM visita ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,8 @@ $resultado = mysqli_query($conexion, "SELECT nombre, comentario FROM visitas ORD
 
         <?php while($fila = mysqli_fetch_assoc($resultado)) { ?>
         <tr>
-            <td><?= $fila['nombre'] ?></td>
-            <td><?= $fila['comentario'] ?></td>
+            <td><?= htmlspecialchars($fila['nombre']) ?></td>
+            <td><?= htmlspecialchars($fila['comentario']) ?></td>
         </tr>
         <?php } ?>
 
